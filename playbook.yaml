@@ -1,0 +1,14 @@
+---
+- name: Nginx web server
+  hosts: aws
+  tasks:
+  - name: install Nginx
+    apt:
+      name: nginx
+      state: absent #latest
+    become: True
+  - name: start nginx service
+    service:
+      name: nginx
+      state: stopped #started
+    become: True
