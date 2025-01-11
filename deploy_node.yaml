@@ -1,0 +1,38 @@
+---
+- name: install node & nmp
+  hosts: aws
+  become: yes
+  tasks:
+    - name: update apt repo & cache
+      apt: 
+        update_cache: yes 
+        force_apt_get: yes 
+        cache_valid_time: 3600
+    - name: install nodejs & npm
+      apt:
+        pkg:
+          - nodejs
+          - npm
+
+- name: install node & nmp
+  hosts: aws
+  become: yes
+  tasks:
+    - name: copy nodejs folder to server
+      copy:
+        src: /home/lll/DemoProject/nodejs-app-1.0.tgz
+        dest: /home/ubuntu/nodejs-app-1.0.tgz
+    - name: unpack
+      unarchive:
+        src: /home/ubuntu/nodejs-app-1.0.tgz
+        dest: /home/ubuntu/
+        remote_src: yes
+    - name: install dep.
+      npm:
+        path: /home/ubuntu/package
+    - name: start app
+      command:
+        chdir: /home/ubuntu/package/app
+        cmd: node server
+      async: 1000
+      poll: 0

@@ -1,2 +1,2 @@
 [aws]
-54.82.83.190 ansible_ssh_private_key_file=/home/lll/nana.pem ansible_user=ubuntu
+34.230.89.134 ansible_ssh_private_key_file=/home/lll/nana.pem ansible_user=ubuntu
